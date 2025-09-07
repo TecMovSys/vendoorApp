@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'productos',
+    'whitenoise.runserver_nostatic'
 ]
 
 # Middleware

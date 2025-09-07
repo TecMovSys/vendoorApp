@@ -57,7 +57,6 @@ function Vender() {
   return (
     <div className="vender-container">
       <section className="product-form-section">
-        <h2></h2>
         <ProductForm />
       </section>
 

@@ -44,7 +44,7 @@ function ProductList({ showOnlyUserProducts = false, excludeUserProducts = false
 
   const toggleDisponibilidad = async (producto) => {
     try {
-      const res = await axios.patch(
+      await axios.patch(
         `http://127.0.0.1:8000/api/productos/${producto.id}/`,
         { is_available: !producto.is_available },
         {

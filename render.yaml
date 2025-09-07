@@ -4,7 +4,10 @@ services:
     env: python
     plan: free
     buildCommand: |
-      cd frontend && npm install && npm run build && cd ..
+      cd frontend
+      npm install
+      npm run build
+      cd ..
       pip install -r requirements.txt
       python vendoor/manage.py collectstatic --noinput
       python vendoor/manage.py migrate --noinput

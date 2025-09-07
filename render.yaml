@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: django-backend
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python vendoor/manage.py collectstatic --noinput
+      python vendoor/manage.py migrate --noinput
+    startCommand: gunicorn vendoor.wsgi:application
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        value: f0_p*q)vgwr&chei98%kuch1gj$bu2yimi-vgws8-c2  # Reemplaza con tu clave segura
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://react-frontend.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mydatabase  # Reemplaza con el nombre real de tu DB en Render
+
+databases:
+  - name: mydatabase
+    plan: free
+    databaseName: vendoor_db
+    user: vendoor_user
+
+staticSites:
+  - name: react-frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    publishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://django-backend.onrender.com/api/

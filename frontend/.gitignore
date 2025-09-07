@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Allow frontend React build to be committed
+!/frontend/build/
+!/frontend/build/index.html
+!/frontend/build/static/

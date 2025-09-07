@@ -4,12 +4,10 @@ services:
     env: python
     plan: free
     buildCommand: |
-      cd frontend
-      npm install
-      npm run build
-      
-      pip install -r requirements.txt
-      python vendoor/manage.py collectstatic --noinput
+      npm install --prefix frontend && \
+      npm run build --prefix frontend && \
+      pip install -r requirements.txt && \
+      python vendoor/manage.py collectstatic --noinput && \
       python vendoor/manage.py migrate --noinput
     startCommand: gunicorn vendoor.wsgi:application
     autoDeploy: true
